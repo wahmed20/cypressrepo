@@ -1,35 +1,54 @@
 /// <reference types="cypress"/>
+
+//import the page objects 
+import homePageObjects from '../pageObjects/1-homePage'
+import editComputer from '../pageObjects/2-editComputerPage'
+
 describe('Locate the following computer in the table: Commodore 64', function()
 {
+    //create a reference variable to call the methods from homePageObjects class
+    const home = new homePageObjects()
+    const editComp = new editComputer()
+    
     it('Create a negative test case to ensure a failure validation displays.', function()
     {
+        
         //launch the website
-        cy.visit('https://computer-database.gatling.io/computers')
+        home.visit()
+
         //Requirements mentioned Click to edit Commodore 64 but I don't see any Edit button
         //clear the search box and type any random text to make sure nothing returns
-        cy.get('#searchbox').clear().type('random')
+        home.searchbox('random')
+        
         //click on Filter by name button
-        cy.get('#searchsubmit').click()
+        home.filterByNameButton()
+
         //Verify nothing returns in the search results
-        cy.get('#main > div.well > em').contains('Nothing to display')
+        home.searchResults()
     })   
 
     it('Create a positive test case to ensure that valid data is updated successfully.', function()
     {
         //launch the website
-        cy.visit('https://computer-database.gatling.io/computers')
+        home.visit()
+
         //filter the search with Commodore 64
-        cy.get('#searchbox').clear().type('Commodore 64')
+        home.searchbox('Commodore 64')
+
         //click on Filter by name button
-        cy.get('#searchsubmit').click()
+        home.filterByNameButton()
+
         //select the first item in the list
-        cy.get('#main > table > tbody > tr:nth-child(1) > td:nth-child(1) > a').click()
+        home.firstComputer()
+
         //clear the text from Computer name field then enter Commodore 64
-        cy.get('#name').clear().type('Commodore 64')
+        editComp.computerName('Commodore 64')
+
         //click on save this computer
-        cy.get('input[value="Save this computer"]').click()
+        editComp.saveComputerButton()
+        
         //verify the success message
-        cy.get('#main > div.alert-message.warning').contains('Done ! Computer Commodore 64 has been updated')
+        editComp.successMessage()
 
     })  
 })
