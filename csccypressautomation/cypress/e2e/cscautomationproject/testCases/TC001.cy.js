@@ -16,6 +16,10 @@ describe('Locate the following computer in the table: Commodore 64', function()
         //launch the website
         home.visit()
 
+        //Verify a warning message if the user clicks on Filter by name without entering anything in the 
+        // search box.
+        home.searchboxwarning()
+
         //Requirements mentioned Click to edit Commodore 64 but I don't see any Edit button
         //clear the search box and type any random text to make sure nothing returns
         home.searchbox('random')

@@ -13,6 +13,15 @@ class homePageObjects
         return this
     }
 
+    searchboxwarning()
+    {
+        const searchboxwarning = cy.get('#searchsubmit').click()
+        cy.get('#searchbox:invalid')
+        .invoke('prop', 'validationMessage')
+        .should('equal', 'Please fill out this field.')
+        return this
+    }
+
     filterByNameButton()
     {
         const filterByName = cy.get('#searchsubmit')
