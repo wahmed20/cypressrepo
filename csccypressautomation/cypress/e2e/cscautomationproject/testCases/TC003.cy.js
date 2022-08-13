@@ -19,7 +19,7 @@ describe('Filter computer list by “IBM” and return a list of computer names 
         //click on Filter by name button
         home.filterByNameButton()
 
-        //itirate the Next button and go to last page then print the table data
+        //itirate the Next button and go to last page then print the table data from column 1 only
         home.pagination()
     })   
 })

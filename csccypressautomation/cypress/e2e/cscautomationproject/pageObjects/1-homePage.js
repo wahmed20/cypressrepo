@@ -67,19 +67,20 @@ class homePageObjects
 
     pagination()
     {
-        for (var i = 1; i < 5; i++) {
+        for (var i = 1; i < 3; i++) 
+        {
             cy.get('#pagination > ul > li.next > a').click()
-            cy.get('#main > table > tbody >tr')
-            .each(function($row, index, $rows)
+        }
+            cy.get('#main > table > tbody >tr').each(function($row, index, $rows)
             {
                 cy.wrap($row).within(function(){
-                cy.get('td').each(function($cellData, index, $columns){
+                cy.get('td:nth-child(1)').each(function($cellData, index, $columns){
                 cy.log($cellData.text())
                 })
     
                 })
             })
-       }
+       
         return this   
     }
     
